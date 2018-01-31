@@ -1,4 +1,4 @@
-package tips
+package tipsGo
 
 import (
 	"time"

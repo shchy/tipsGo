@@ -1,17 +1,17 @@
-package tipsGo
+package models
 
 // DataContext is DataStore
 type DataContext interface {
-	GetTasks() []Task
-	UpdateTask(task *Task) bool
+	GetTasks() Tasks
+	UpdateTask(task Task) bool
 	DeleteTask(id int) bool
 
 	GetUsers() []User
-	UpdateUser(user *User) bool
+	UpdateUser(user User) bool
 	DeleteUser(id int) bool
 
 	GetIterators() []Iterator
-	UpdateIterator(it *Iterator) bool
+	UpdateIterator(it Iterator) bool
 	DeleteIterator(id int) bool
 
 	GetProjects() []Project

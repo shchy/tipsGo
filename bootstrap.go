@@ -5,13 +5,12 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/shchy/tipsGo/models"
 )
 
 func main() {
 	fmt.Println("hello")
-	fmt.Println(TaskImpl{name: "namae", value: 1})
-
-	//
+	fmt.Println(models.NewTask("namae", 1))
 
 	r := mux.NewRouter()
 	// r.HandleFunc("/", HomeHandler)

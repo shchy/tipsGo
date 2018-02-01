@@ -3,18 +3,18 @@ package models
 // DataContext is DataStore
 type DataContext interface {
 	GetTasks() Tasks
-	UpdateTask(task Task) bool
-	DeleteTask(id int) bool
+	UpdateTask(task Task) error
+	DeleteTask(id int) error
 
 	GetUsers() []User
-	UpdateUser(user User) bool
-	DeleteUser(id int) bool
+	UpdateUser(user User) error
+	DeleteUser(id int) error
 
 	GetIterators() []Iterator
-	UpdateIterator(it Iterator) bool
-	DeleteIterator(id int) bool
+	UpdateIterator(it Iterator) error
+	DeleteIterator(id int) error
 
 	GetProjects() []Project
-	UpdateProject(it *Project) bool
-	DeleteProject(id int) bool
+	UpdateProject(it *Project) error
+	DeleteProject(id int) error
 }

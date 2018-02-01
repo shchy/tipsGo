@@ -23,36 +23,43 @@ func (c *InMemoryDataContext) GetTasks() Tasks {
 }
 
 // UpdateTask Taskの更新または新規登録
-func (c *InMemoryDataContext) UpdateTask(task Task) bool {
-	if task.GetID() == -1 {
-		task.setId(c.tasks.ToIds().MaxID() + 1)
+func (c *InMemoryDataContext) UpdateTask(task Task) error {
+	if task.ID == -1 {
+		task.ID = linq.From(c.tasks).SelectT(func(t Task) int { return t.ID }).Max().(int) + 1
 		c.tasks = append(c.tasks, task)
 	} else {
-		c.DeleteTask(task.GetID())
+		c.DeleteTask(task.ID)
 		c.tasks = append(c.tasks, task)
 	}
-	return true
+	return nil
 }
 
 // DeleteTask ...
-func (c *InMemoryDataContext) DeleteTask(id int) bool {
-	linq.From(c.tasks).WhereT(func(x Task) bool { return x.GetID() != id }).ToSlice(&c.tasks)
-	return true
+func (c *InMemoryDataContext) DeleteTask(id int) error {
+	linq.From(c.tasks).WhereT(func(x Task) bool { return x.ID != id }).ToSlice(&c.tasks)
+	return nil
 }
 
 // GetUsers ...
 func (c *InMemoryDataContext) GetUsers() []User {
-	return []User{}
+	return c.users
 }
 
 // UpdateUser ...
-func (c *InMemoryDataContext) UpdateUser(user User) bool {
-	return true
+func (c *InMemoryDataContext) UpdateUser(user User) error {
+	if user.ID == -1 {
+		user.ID = linq.From(c.users).SelectT(func(u User) int { return u.ID }).Max().(int) + 1
+		c.users = append(c.users, user)
+	} else {
+		c.DeleteUser(user.ID)
+		c.users = append(c.users, user)
+	}
+	return nil
 }
 
 // DeleteUser ...
-func (c *InMemoryDataContext) DeleteUser(id int) bool {
-	return true
+func (c *InMemoryDataContext) DeleteUser(id int) error {
+	return nil
 }
 
 // GetIterators ...
@@ -61,13 +68,13 @@ func (c *InMemoryDataContext) GetIterators() []Iterator {
 }
 
 // UpdateIterator ...
-func (c *InMemoryDataContext) UpdateIterator(it Iterator) bool {
-	return true
+func (c *InMemoryDataContext) UpdateIterator(it Iterator) error {
+	return nil
 }
 
 // DeleteIterator ...
-func (c *InMemoryDataContext) DeleteIterator(id int) bool {
-	return true
+func (c *InMemoryDataContext) DeleteIterator(id int) error {
+	return nil
 }
 
 // GetProjects ...
@@ -76,11 +83,11 @@ func (c *InMemoryDataContext) GetProjects() []Project {
 }
 
 // UpdateProject ...
-func (c *InMemoryDataContext) UpdateProject(it *Project) bool {
-	return true
+func (c *InMemoryDataContext) UpdateProject(it *Project) error {
+	return nil
 }
 
 // DeleteProject ...
-func (c *InMemoryDataContext) DeleteProject(id int) bool {
-	return true
+func (c *InMemoryDataContext) DeleteProject(id int) error {
+	return nil
 }

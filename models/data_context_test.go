@@ -12,9 +12,8 @@ func TestInterface(t *testing.T) {
 
 		task00 := NewTask("test00", 8)
 		task01 := NewTask("test01", 16)
-		insertResult := c.UpdateTask(task00)
+		c.UpdateTask(task00)
 		c.UpdateTask(task01)
-		t.Log(insertResult)
 
 		tasks := c.GetTasks()
 		if len(tasks) != 2 {
@@ -24,7 +23,7 @@ func TestInterface(t *testing.T) {
 			t.Log(task)
 		}
 
-		c.DeleteTask(task00.GetID())
+		c.DeleteTask(task00.ID)
 		tasks = c.GetTasks()
 		if len(tasks) != 1 {
 			t.Fail()

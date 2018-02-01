@@ -1,6 +1,6 @@
 package models
 
 // User user
-type User interface {
+type User struct {
 	Identity
 }

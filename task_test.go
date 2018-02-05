@@ -3,11 +3,12 @@ package tipsGo
 import (
 	"fmt"
 	"testing"
+
+	"github.com/shchy/tipsGo/models"
 )
 
 func TestA(t *testing.T) {
 	fmt.Println("hello")
-	fmt.Println(TaskImpl{name: "namae", value: 1})
-	u := User{}
-	fmt.Println(u.GetName())
+	u := models.User{}
+	fmt.Println(u.Name)
 }

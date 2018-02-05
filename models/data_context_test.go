@@ -12,12 +12,13 @@ func TestInterface(t *testing.T) {
 
 		task00 := NewTask("test00", 8)
 		task01 := NewTask("test01", 16)
-		c.UpdateTask(task00)
-		c.UpdateTask(task01)
+		c.UpdateTask(&task00)
+		c.UpdateTask(&task01)
 
 		tasks := c.GetTasks()
 		if len(tasks) != 2 {
 			t.Fail()
+			return
 		}
 		for _, task := range tasks {
 			t.Log(task)
@@ -27,6 +28,7 @@ func TestInterface(t *testing.T) {
 		tasks = c.GetTasks()
 		if len(tasks) != 1 {
 			t.Fail()
+			return
 		}
 		for _, task := range tasks {
 			t.Log(task)
